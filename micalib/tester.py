@@ -66,7 +66,7 @@ class Tester(object):
         dist.barrier()
         map_location = {'cuda:%d' % 0: 'cuda:%d' % self.device}
 
-        checkpoint = torch.load(model_path, map_location)
+        checkpoint = torch.load(model_path, map_location=map_location, weights_only=True)
 
         if 'arcface' in checkpoint:
             self.nfc.arcface.load_state_dict(checkpoint['arcface'])
@@ -178,7 +178,7 @@ class Tester(object):
 
     def create_now_cache(self):
         if os.path.exists('test_now_cache.pt'):
-            cache = self.cache_to_cuda(torch.load('test_now_cache.pt'))
+            cache = self.cache_to_cuda(torch.load('test_now_cache.pt', weights_only=False))
             return cache
         else:
             cache = {}
@@ -197,7 +197,7 @@ class Tester(object):
 
     def create_stirling_cache(self):
         if os.path.exists('test_stirling_cache.pt'):
-            cache = torch.load('test_stirling_cache.pt')
+            cache = torch.load('test_stirling_cache.pt', weights_only=False)
             return cache
         else:
             cache = {}

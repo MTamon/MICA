@@ -23,12 +23,12 @@ from loguru import logger
 
 class BestModel:
     def __init__(self, trainer):
-        self.average = np.Inf
-        self.weighted_average = np.Inf
-        self.smoothed_average = np.Inf
-        self.smoothed_weighted_average = np.Inf
-        self.running_average = np.Inf
-        self.running_weighted_average = np.Inf
+        self.average = np.inf
+        self.weighted_average = np.inf
+        self.smoothed_average = np.inf
+        self.smoothed_weighted_average = np.inf
+        self.running_average = np.inf
+        self.running_weighted_average = np.inf
         self.now_mean = None
 
         self.trainer = trainer

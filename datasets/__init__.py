@@ -26,7 +26,7 @@ def build_train(config, device):
     total_images = 0
     for dataset in config.training_data:
         dataset_name = dataset.upper()
-        config.n_train = np.Inf
+        config.n_train = np.inf
         if type(dataset) is list:
             dataset_name, n_train = dataset
             config.n_train = n_train
@@ -43,7 +43,7 @@ def build_val(config, device):
     total_images = 0
     for dataset in config.eval_data:
         dataset_name = dataset.upper()
-        config.n_train = np.Inf
+        config.n_train = np.inf
         if type(dataset) is list:
             dataset_name, n_train = dataset
             config.n_train = n_train

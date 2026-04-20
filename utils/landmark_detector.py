@@ -39,7 +39,7 @@ class LandmarksDetector:
             self._face_detector = FaceAnalysis(name='antelopev2', providers=['CUDAExecutionProvider'])
             self._face_detector.prepare(ctx_id=0, det_size=(224, 224))
         elif model == detectors.FAN:
-            self._face_detector = face_alignment.FaceAlignment(face_alignment.LandmarksType._2D, device=device)
+            self._face_detector = face_alignment.FaceAlignment(face_alignment.LandmarksType.TWO_D, device=device)
         else:
             logger.error(f'[ERROR] Landmark predictor not supported {model}')
             exit(-1)

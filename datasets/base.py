@@ -34,7 +34,7 @@ class BaseDataset(Dataset, ABC):
     def __init__(self, name, config, device, isEval):
         self.K = config.K
         self.isEval = isEval
-        self.n_train = np.Inf
+        self.n_train = np.inf
         self.imagepaths = []
         self.face_dict = {}
         self.name = name
@@ -57,8 +57,8 @@ class BaseDataset(Dataset, ABC):
         self.set_smallest_k()
 
     def set_smallest_k(self):
-        self.min_max_K = np.Inf
-        max_min_k = -np.Inf
+        self.min_max_K = np.inf
+        max_min_k = -np.inf
         for key in self.face_dict.keys():
             length = len(self.face_dict[key][0])
             if length < self.min_max_K:

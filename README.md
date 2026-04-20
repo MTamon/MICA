@@ -26,16 +26,49 @@
 
 ### Installation
 
-After cloning the repository please install the environment by using attached conda `environment.yml` file with the command 
-``conda env create -f environment.yml``. Additionally, the FLAME2020 model is needed. To obtain it please create an account at the [website](https://flame.is.tue.mpg.de/) download the model and place it in the `/data/pretrained/FLAME2020/` folder. 
+#### Supported environment (CUDA 12.8 branch)
 
-You can also simply run the `install.sh` script:
+| Component    | Version                                               |
+|--------------|-------------------------------------------------------|
+| OS           | Ubuntu 22.04                                          |
+| Python       | 3.11                                                  |
+| PyTorch      | 2.9.1 (torchvision 0.24.1)                            |
+| CUDA Toolkit | 12.8                                                  |
+| GCC          | gcc-11 / g++-11                                       |
+| GPU arch     | sm_75, sm_80, sm_86, sm_89, sm_90, sm_120             |
+
+The dependency set is aligned with
+[MTamon/FlashAvatar @ release/cuda128-fixed](https://github.com/MTamon/FlashAvatar/tree/release/cuda128-fixed)
+and [MTamon/DECA @ release/cuda128](https://github.com/MTamon/DECA/tree/release/cuda128).
+
+#### Quick install (recommended)
 
 ```shell
-git clone https://github.com/Zielon/MICA.git
+git clone https://github.com/MTamon/MICA.git
 cd MICA
-./install.sh
+python3.11 -m venv .venv
+source .venv/bin/activate
+./install_128.sh   # pins + chumpy (git) + pytorch3d v0.7.8 source build
+./install.sh       # downloads FLAME2020 + MICA + insightface models
 ```
+
+`install_128.sh` installs the pinned library set from `requirements_128.txt`
+(torch 2.9.1 + CUDA 12.8 wheels), builds `chumpy` from its numpy 2.x-friendly
+main branch, and source-builds `pytorch3d` v0.7.8 against the new torch.
+
+`install.sh` is the original data-download script; it still asks for your
+FLAME credentials and fetches the MICA / insightface model bundles. The conda
+`environment.yml` path is retained only for reference and is no longer
+actively maintained on this branch.
+
+#### Legacy (CUDA 11.6 / PyTorch 1.13) install
+
+The original conda recipe is still in `environment.yml` for reproducibility:
+
+```shell
+./install.sh   # original path: downloads models + `conda env create -f environment.yml`
+```
+
 you will be asked to provide `{flame_user}` and `{flame_password}` for your FLAME account in order to access the file server.
 
 ### Pre-trained Models
